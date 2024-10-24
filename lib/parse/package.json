@@ -1,0 +1,12 @@
+{
+  "name": "@8kb/parse",
+  "version": "0.0.0",
+  "main": "mod.js",
+  "scripts": {},
+  "keywords": ["chr"],
+  "author": "PPz",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bit-reader": "^0.0.0"
+  }
+}
