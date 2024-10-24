@@ -7,7 +7,8 @@ export
 class BitReader {
   public readonly uint8_array: Uint8Array
   public readonly bit_length: number
-  constructor(private array_buffer: ArrayBuffer)
+  private array_buffer: ArrayBuffer
+  constructor(array_buffer: ArrayBuffer)
 
   get_byte(byte_index: number): number
   
