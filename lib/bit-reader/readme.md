@@ -1,5 +1,9 @@
 # BitReader.js
 
+``` bash
+npm install bit-reader
+```
+
 ## Development
 
 ##### test

@@ -2,8 +2,11 @@
   "name": "bit-reader",
   "version": "0.0.0",
   "type": "module",
-
+  "main": "mod.js",
   "scripts": {
     "test": "node --test --watch"
-  }
+  },
+  "keywords": ["binary", "ArrayBuffer"],
+  "author": "PPz",
+  "license": "UNLICENSED"
 }
