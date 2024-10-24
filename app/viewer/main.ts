@@ -1,5 +1,6 @@
 import { parse_8kb } from '@8kb/parse'
 import { render_tile, type color_map } from '@8kb/render'
+import { divide } from 'bit-reader'
 
 const canvas = document.querySelector('canvas')!
 const canvas_ctx = canvas.getContext('2d')!
@@ -19,60 +20,18 @@ file_input.onchange = async function(evt) {
 
   const tiles = parse_8kb(await file.arrayBuffer())
 
-  render_tile({
-    dx: 0,
-    dy: 0,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[0],
-  })
-  render_tile({
-    dx: 8,
-    dy: 0,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[1],
-  })
-  render_tile({
-    dx: 0,
-    dy: 8,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[2],
-  })
-  render_tile({
-    dx: 8,
-    dy: 8,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[3],
-  })
-  render_tile({
-    dx: 0,
-    dy: 16,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[4],
-  })
-  render_tile({
-    dx: 8,
-    dy: 16,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[5],
-  })
-  render_tile({
-    dx: 0,
-    dy: 24,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[6],
-  })
-  render_tile({
-    dx: 8,
-    dy: 24,
-    color_map,
-    ctx: canvas_ctx,
-    tile: tiles[7],
-  })
+  const row_length = 16
+  canvas.width = row_length * 8
+  canvas.height = tiles.length / row_length * 8
+
+  for (let i=0; i<tiles.length; i++) {
+    const [quotient, remainder] = divide(i, row_length)
+    render_tile({
+      dx: remainder * 8,
+      dy: quotient * 8,
+      color_map,
+      ctx: canvas_ctx,
+      tile: tiles[i],
+    })
+  }
 }
