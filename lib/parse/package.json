@@ -2,11 +2,18 @@
   "name": "@8kb/parse",
   "version": "0.0.0",
   "main": "mod.js",
-  "scripts": {},
-  "keywords": ["chr"],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "chr"
+  ],
   "author": "PPz",
   "license": "UNLICENSED",
   "dependencies": {
     "bit-reader": "^0.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
   }
 }
