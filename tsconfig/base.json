@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "strict": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": ["DOM", "ES2022", "DOM.Iterable"],
+    "module": "ESNext"
   }
 }
