@@ -7,6 +7,7 @@ type tile = color_8kb[] & { length: 64 }
 
 export
 const tile_length = 128 // one tile is represent by 128 bits
+const tile_color_interval = tile_length / 2
 
 export
 function parse_8kb(array_buffer: ArrayBuffer): tile[] {
@@ -22,13 +23,11 @@ function parse_8kb(array_buffer: ArrayBuffer): tile[] {
   let tile_index = 0
   while(tile_index < tiles_sum) {
     const tile: color_8kb[] = []
-    for (
-      let bit_index = tile_index * tile_length;
-      bit_index < (tile_index + 1) * tile_length;
-      bit_index++
-    ) {
+    const start_index = tile_index * tile_length
+    const end_index = start_index + tile_color_interval
+    for (let bit_index=start_index; bit_index<end_index; bit_index++) {
       let left_bit = br.read_bit(bit_index)
-      let right_bit = br.read_bit(bit_index + tile_length / 2)
+      let right_bit = br.read_bit(bit_index + tile_color_interval)
       tile.push(left_bit * 2 + right_bit as color_8kb)
     }
     tile_index++
