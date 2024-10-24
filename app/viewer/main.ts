@@ -1,4 +1,14 @@
+import { parse_8kb } from '@8kb/parse'
 import { render_tile, type color_map } from '@8kb/render'
+
+document.getElementById('file-input')!.onchange = async function(evt) {
+  // @ts-ignore
+  const file: File | undefined = evt.target.files[0]
+  if (file)
+    console.log(
+      parse_8kb(await file.arrayBuffer())
+    )
+}
 
 const canvas = document.querySelector('canvas')!
 const canvas_ctx = canvas.getContext('2d')!
@@ -60,6 +70,3 @@ render_tile({
     0, 0, 0, 0, 0, 0, 0, 0,
   ],
 })
-
-const img = document.getElementById('preview') as HTMLImageElement
-img.src = canvas.toDataURL()

@@ -31,7 +31,7 @@ function parse_8kb(array_buffer: ArrayBuffer): tile[] {
       let right_bit = br.read_bit(bit_index + tile_length / 2)
       tile.push(left_bit * 2 + right_bit as color_8kb)
     }
-
+    tile_index++
     tiles.push(tile as tile)
   }
 
