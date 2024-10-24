@@ -1,7 +1,8 @@
-import { color_8kb, type tile } from '@8kb/parse'
+import type { color_8kb, tile } from '@8kb/parse'
 
 type RenderingContext = OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D
 type color_web = [number, number, number, number]
+export
 type color_map = Record<color_8kb, color_web>
 
 export
