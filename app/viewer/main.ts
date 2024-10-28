@@ -1,6 +1,5 @@
-import { parse_8kb } from '@8kb/parse'
-import { tile2canvas, type color_map } from '@8kb/render'
-import { divide } from 'bit-reader'
+import { parse_tile, tile2canvas, type color_map } from '@8kb/tile'
+import { divide } from '@8kb/bit-reader'
 
 const canvas = document.querySelector('canvas')!
 const canvas_ctx = canvas.getContext('2d')!
@@ -19,7 +18,7 @@ file_input.onchange = async function(evt) {
   const file: File | undefined = evt.target.files[0]
   if (!file) return
 
-  const tiles = parse_8kb(await file.arrayBuffer())
+  const tiles = parse_tile(await file.arrayBuffer())
 
   const row_length = 16
   canvas.width = row_length * 8 * scale

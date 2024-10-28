@@ -1,4 +1,4 @@
-# @8kb/parse
+# @8kb/tile
 
 ## Tilemap
 + 1 pixel = 2 bits (4 colors) (left bit & right bit)

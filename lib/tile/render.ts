@@ -1,5 +1,5 @@
-import type { color_8kb, tile } from '@8kb/parse'
-import { scale_tile } from '@8kb/parse'
+import type { color_8kb, tile } from './common'
+import { scale_tile } from './scale'
 
 type RenderingContext = OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D
 type color_web = [number, number, number, number]

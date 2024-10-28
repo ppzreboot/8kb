@@ -1,18 +1,12 @@
-import { BitReader, divide } from 'bit-reader'
+import { tile_length } from './common'
+import type { tile, color_8kb } from './common'
+import { BitReader, divide } from '@8kb/bit-reader'
 
-export
-type color_8kb = 0 | 1 | 2 | 3
-export
-type tile_row = color_8kb[] & { length: 8 }
-export
-type tile = tile_row[] & { length: 8 }
 
-export
-const tile_length = 128 // one tile is represent by 128 bits
 const tile_color_interval = tile_length / 2
 
 export
-function parse_8kb(array_buffer: ArrayBuffer): tile[] {
+function parse_tile(array_buffer: ArrayBuffer): tile[] {
   const byte_length = array_buffer.byteLength
   if (byte_length % 16 !== 0) // one tile = 16 bytes
     throw Error('invalid array_buffer of chr rom: one tile = 16 bytes')
@@ -38,28 +32,4 @@ function parse_8kb(array_buffer: ArrayBuffer): tile[] {
   }
 
   return tiles
-}
-
-export
-function scale_tile(tile: tile, ratio: number): color_8kb[][] {
-  return tile
-    .map(
-      row => {
-        const rows: color_8kb[][] = []
-        for (let i=0; i<ratio; i++)
-          rows.push(row.slice())
-        return rows
-      }
-    )
-    .flat()
-    .map(
-      row =>
-        row.map(color => {
-          const colors: color_8kb[] = []
-          for (let i=0; i<ratio; i++)
-            colors.push(color)
-          return colors
-        })
-        .flat()
-    )
 }

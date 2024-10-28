@@ -9,6 +9,8 @@ const ctx = await context({
   logLevel: 'info',
 })
 
+await ctx.watch()
+
 await ctx.serve({
   servedir: '.',
 })
