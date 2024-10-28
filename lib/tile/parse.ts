@@ -1,6 +1,6 @@
 import { tile_length } from './common'
 import type { tile, color_8kb } from './common'
-import { BitReader, divide } from '@8kb/bit-reader'
+import { BitReader, divide } from '@8kb/bit.io'
 
 
 const tile_color_interval = tile_length / 2

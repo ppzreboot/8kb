@@ -1,5 +1,5 @@
 import { parse_tile, tile2canvas, type color_map } from '@8kb/tile'
-import { divide } from '@8kb/bit-reader'
+import { divide } from '@8kb/bit.io'
 
 const canvas = document.querySelector('canvas')!
 const canvas_ctx = canvas.getContext('2d')!

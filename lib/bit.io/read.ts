@@ -1,7 +1,5 @@
-// @ts-check
-
 export
-function divide(divident, divisor) {
+function divide(divident: number, divisor: number) {
   const remainder = divident % divisor
   return [
     (divident - remainder) / divisor,
@@ -11,19 +9,20 @@ function divide(divident, divisor) {
 
 export
 class BitReader {
-  constructor(array_buffer) {
-    this.array_buffer = array_buffer
+  readonly uint8_array: Uint8Array
+  readonly bit_length: number
+  constructor(private array_buffer: ArrayBuffer) {
     this.uint8_array = new Uint8Array(array_buffer)
     this.bit_length = this.array_buffer.byteLength * 8
   }
 
-  get_byte(index) {
+  get_byte(index: number) {
     if (index >= this.array_buffer.byteLength)
       throw Error('byte_index is out of range')
     return this.uint8_array[index]
   }
 
-  read_bit(index) {
+  read_bit(index: number) {
     if (index >= this.bit_length)
       throw Error('bit_index is out of range')
 

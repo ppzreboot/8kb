@@ -1,10 +1,11 @@
 {
-  "name": "@8kb/bit-reader",
+  "name": "@8kb/bit.io",
   "version": "0.0.0",
   "type": "module",
   "main": "mod.js",
   "scripts": {
-    "test": "node --test --watch"
+    "build": "tsc",
+    "test": "tsc && node --test --watch"
   },
   "keywords": ["binary", "ArrayBuffer"],
   "author": "PPz",

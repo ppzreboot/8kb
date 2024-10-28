@@ -8,6 +8,7 @@ git clone git@github.com:ppzreboot/8kb.git
 cd 8kb
 npm install
 
+npm run build -w @8kb/bit.io
 npm run build -w @8kb/tile
 npm run dev -w app/viewer
 ```
