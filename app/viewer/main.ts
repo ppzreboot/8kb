@@ -14,6 +14,7 @@ const color_map: color_map = {
 }
 
 file_input.onchange = async function(evt) {
+  const scale = 4
   // @ts-ignore
   const file: File | undefined = evt.target.files[0]
   if (!file) return
@@ -21,17 +22,19 @@ file_input.onchange = async function(evt) {
   const tiles = parse_8kb(await file.arrayBuffer())
 
   const row_length = 16
-  canvas.width = row_length * 8
-  canvas.height = tiles.length / row_length * 8
+  canvas.width = row_length * 8 * scale
+  canvas.height = tiles.length * scale / row_length * 8
 
   for (let i=0; i<tiles.length; i++) {
     const [quotient, remainder] = divide(i, row_length)
     tile2canvas({
-      dx: remainder * 8,
-      dy: quotient * 8,
+      dx: remainder * 8 * scale,
+      dy: quotient * 8 * scale,
       color_map,
       ctx: canvas_ctx,
       tile: tiles[i],
+
+      scale,
     })
   }
 }
