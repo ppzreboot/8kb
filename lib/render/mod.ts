@@ -14,11 +14,16 @@ interface I_render_tile_opts {
   dy: number
 }
 export
-function render_tile(opts: I_render_tile_opts) {
-  const pixels = opts.tile.map(
-    color_8kb => opts.color_map[color_8kb]
-  )
+function tile2canvas(opts: I_render_tile_opts) {
+  const pixels = opts.tile
+    .flat()
+    .map(color_8kb => opts.color_map[color_8kb])
   const data = new Uint8ClampedArray(pixels.flat())
   const image_data = new ImageData(data, 8, 8)
   opts.ctx.putImageData(image_data, opts.dx, opts.dy)
+}
+
+export
+function tile2png() {
+
 }

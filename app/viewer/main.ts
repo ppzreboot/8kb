@@ -1,5 +1,5 @@
 import { parse_8kb } from '@8kb/parse'
-import { render_tile, type color_map } from '@8kb/render'
+import { tile2canvas, type color_map } from '@8kb/render'
 import { divide } from 'bit-reader'
 
 const canvas = document.querySelector('canvas')!
@@ -26,7 +26,7 @@ file_input.onchange = async function(evt) {
 
   for (let i=0; i<tiles.length; i++) {
     const [quotient, remainder] = divide(i, row_length)
-    render_tile({
+    tile2canvas({
       dx: remainder * 8,
       dy: quotient * 8,
       color_map,
