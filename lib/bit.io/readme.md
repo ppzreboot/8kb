@@ -1,7 +1,7 @@
 # BitReader.js
 
 ``` bash
-npm install @8kb/bit-reader
+npm install @8kb/bit.io
 ```
 
 ## Development
