@@ -2,12 +2,23 @@
 <html lang="en">
   <head>
     <title>8 kb Viewer</title>
+    <style>
+      .row {
+        margin-top: 1rem;
+      }
+    </style>
   </head>
   <body>
-    <div>
+    <div class="row">
+      <label>
+        <span>Scale</span>
+        <input id="scale-input" type="number">
+      </label>
+    </div>
+    <div class="row">
       <input type="file" id="file-input">
     </div>
-    <div>
+    <div class="row">
       <canvas></canvas>
     </div>
 

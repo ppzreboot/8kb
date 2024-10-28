@@ -3,7 +3,8 @@ import { divide } from '@8kb/bit-reader'
 
 const canvas = document.querySelector('canvas')!
 const canvas_ctx = canvas.getContext('2d')!
-const file_input = document.getElementById('file-input')!
+const file_input = document.getElementById('file-input')! as HTMLInputElement
+const scale_input = document.getElementById('scale-input')! as HTMLInputElement
 
 const color_map: color_map = {
   0: [0,0,0,0],
@@ -12,14 +13,21 @@ const color_map: color_map = {
   3: [107,109,0,255],
 }
 
-file_input.onchange = async function(evt) {
-  const scale = 4
+file_input.onchange = render
+scale_input.oninput = render
+
+async function render() {
+  let scale = Number(scale_input.value)
+  if (!(Number.isInteger(scale) && scale > 0)) {
+    console.error('Scale must be a positive integer')
+    scale = 1
+  }
+
   // @ts-ignore
-  const file: File | undefined = evt.target.files[0]
+  const file: File | undefined = file_input.files[0]
   if (!file) return
 
   const tiles = parse_tile(await file.arrayBuffer())
-
   const row_length = 16
   canvas.width = row_length * 8 * scale
   canvas.height = tiles.length * scale / row_length * 8
