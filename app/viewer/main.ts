@@ -1,6 +1,7 @@
 import { parse_tile, tile2img_data, type color_map } from '@8kb/tile'
 import { divide } from '@8kb/bit.io'
 import { register_showcase, type Showcase } from '@8kb/showcase'
+import { scale_img_data } from '@8kb/scale-image-data'
 
 register_showcase()
 
@@ -47,8 +48,10 @@ function main() {
       })
     })
 
-    showcase.resize_canvas(img_data.width, img_data.height)
-    showcase.set_img_data(img_data)
+    showcase.resize_canvas(img_data.width * scale, img_data.height * scale)
+    showcase.set_img_data(
+      scale_img_data(img_data, scale)
+    )
   }
 }
 main()
