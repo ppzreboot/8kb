@@ -1,0 +1,12 @@
+{
+  "name": "@8kb/scale-image-data",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "mod.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "deno test"
+  },
+  "author": "PPz",
+  "license": "UNLICENSED"
+}
