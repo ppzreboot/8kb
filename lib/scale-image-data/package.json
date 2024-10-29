@@ -5,7 +5,7 @@
   "main": "mod.js",
   "scripts": {
     "build": "tsc",
-    "test": "deno test"
+    "test": "tsc && deno test"
   },
   "author": "PPz",
   "license": "UNLICENSED"

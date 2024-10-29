@@ -1,10 +1,10 @@
 # Scale ImageData
 
 ``` bash
-npm install scale-image-data
+npm install @8kb/scale-image-data
 ```
 
-## 公式
+## 公式 `f: index => (x, y, z)`
 > 以下不是严谨的解题过程，而是记录思考的过程，即“明确问题”与“通过‘推导’与‘观察过程’得到答案”。
 
 ### 问题描述
@@ -40,12 +40,12 @@ npm install scale-image-data
 }
 ```
 
-其中 `g5` 的下标为 21，这里记为 `index=21`。
+其中 `g5` 的下标为 21，记为 `index=21`。
 
 `g5` 的位置是第 2 列、第 1 行的格子中的第 1 个，
 于是其坐标记为 `(2, 1, 1)`。
 
-设映射 `f: index => (x, y, z)`，求 *f*。
+求 `f: index => (x, y, z)`。
 
 ### 解
 
