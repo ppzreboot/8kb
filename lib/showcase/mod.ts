@@ -28,9 +28,15 @@ class Showcase extends HTMLElement {
   #rendered: boolean = false
 
   /** setup: canvas and events */
-  setup(width: number, height: number) {
-    this.setup_canvas(width, height)
-    this.setup_events()
+  resize_canvas(width: number, height: number) {
+    const ratio = window.devicePixelRatio
+    if (ratio !== 1) {
+      this.#canvas!.instance.width = width
+      this.#canvas!.instance.height = height
+      this.#canvas!.instance.style.width = width / ratio + 'px'
+      this.#canvas!.instance.style.height = height / ratio + 'px'
+      // this.#canvas!.ctx.scale(ratio, ratio)
+    }
   }
 
   /** setup/update img */
@@ -79,23 +85,16 @@ class Showcase extends HTMLElement {
   }
 
   connectedCallback() {
+    /* setup dom */
     const shadow_root = this.attachShadow({ mode: 'closed' })
     const instance = document.createElement('canvas')
     const ctx = instance.getContext('2d')!
     this.#canvas = { instance, ctx }
     shadow_root.appendChild(instance)
+    
+    this.setup_events()
   }
 
-  private setup_canvas(width: number, height: number) {
-    const ratio = window.devicePixelRatio
-    if (ratio) {
-      this.#canvas!.instance.width = width * ratio
-      this.#canvas!.instance.height = height * ratio
-      this.#canvas!.instance.style.width = width + 'px'
-      this.#canvas!.instance.style.height = height + 'px'
-      this.#canvas!.ctx.scale(ratio, ratio)
-    }
-  }
   private setup_events() {
   }
 }

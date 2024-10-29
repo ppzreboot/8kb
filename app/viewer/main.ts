@@ -47,7 +47,7 @@ function main() {
       })
     })
 
-    showcase.setup(img_data.width, img_data.height)
+    showcase.resize_canvas(img_data.width, img_data.height)
     showcase.set_img_data(img_data)
   }
 }
