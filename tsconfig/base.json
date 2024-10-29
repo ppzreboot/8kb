@@ -3,6 +3,7 @@
     "strict": true,
     "moduleResolution": "node",
     "lib": ["DOM", "ES2022", "DOM.Iterable"],
+    "target": "ES2022",
     "module": "ESNext"
   }
 }

@@ -1,4 +1,4 @@
-import { scale_img_data } from './scale'
+import { scale_img_data } from '@8kb/scale-image-data'
 
 export
 function register_showcase() {
@@ -10,12 +10,21 @@ interface I_canvas_prop {
   readonly ctx: CanvasRenderingContext2D
 }
 
+interface I_render_opts {
+  scale?: number
+  translate?: {
+    x?: number
+    y?: number
+  }
+}
+
 export
 class Showcase extends HTMLElement {
   #canvas?: I_canvas_prop
   #img_data?: ImageData
 
   #scale: number = 1
+  #translate: { x: number, y: number } = { x: 0, y: 0 }
   #rendered: boolean = false
 
   /** setup: canvas and events */
@@ -35,18 +44,26 @@ class Showcase extends HTMLElement {
   }
 
   /** cleanup old img, and then rerender with scale */
-  render_img_data(scale: number = 1) {
+  render_img_data(opts?: I_render_opts) {
     // 检查组件
     if (!this.#canvas || !this.#img_data)
       throw Error('setup canvas and img_data first')
     // 更新状态
-    this.#scale = scale
+    if (opts?.scale)
+      this.#scale = opts.scale
+    if (opts?.translate) {
+      if (opts.translate.x)
+        this.#translate.x = opts.translate.x
+      if (opts.translate.y)
+        this.#translate.y = opts.translate.y
+    }
+    // cleanup
     if (this.#rendered)
-      {} // cleanup
+      {} // TODO
     else
       this.#rendered = true
     // 准备数据
-    const cloned = scale_img_data(this.#img_data, scale)
+    const cloned = scale_img_data(this.#img_data, this.#scale)
     // 计算位置
     const calc_start = (container: number, content: number) =>
       content >= container
@@ -57,13 +74,13 @@ class Showcase extends HTMLElement {
     // render
     this.#canvas.ctx.putImageData(
       cloned,
-      calc_start(this.#canvas.instance.width, cloned.width),
-      calc_start(this.#canvas.instance.height, cloned.height),
+      calc_start(this.#canvas.instance.width, cloned.width) + this.#translate.x,
+      calc_start(this.#canvas.instance.height, cloned.height) + this.#translate.y,
     )
   }
 
   connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'closed' })
+    this.attachShadow({ mode: 'closed' })
   }
 }
 

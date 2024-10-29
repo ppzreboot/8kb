@@ -9,6 +9,7 @@ cd 8kb
 npm install
 
 npm run build -w @8kb/scale-image-data
+npm run build -w @8kb/showcase
 npm run build -w @8kb/bit.io
 npm run build -w @8kb/tile
 npm run dev -w app/viewer
