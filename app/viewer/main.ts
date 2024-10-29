@@ -1,10 +1,8 @@
-import { parse_tile, tile2canvas, type color_map } from '@8kb/tile'
+import { parse_tile, tile2img_data, type color_map } from '@8kb/tile'
 import { divide } from '@8kb/bit.io'
+import { register_showcase, type Showcase } from '@8kb/showcase'
 
-const canvas = document.querySelector('canvas')!
-const canvas_ctx = canvas.getContext('2d')!
-const file_input = document.getElementById('file-input')! as HTMLInputElement
-const scale_input = document.getElementById('scale-input')! as HTMLInputElement
+register_showcase()
 
 const color_map: color_map = {
   0: [0,0,0,0],
@@ -13,35 +11,45 @@ const color_map: color_map = {
   3: [107,109,0,255],
 }
 
-file_input.onchange = render
-scale_input.oninput = render
+function main() {
+  const file_input = document.getElementById('file-input')! as HTMLInputElement
+  const scale_input = document.getElementById('scale-input')! as HTMLInputElement
+  const showcase = document.querySelector('ppz-showcase') as Showcase
 
-async function render() {
-  let scale = Number(scale_input.value)
-  if (!(Number.isInteger(scale) && scale > 0)) {
-    console.error('Scale must be a positive integer')
-    scale = 1
-  }
+  file_input.onchange = render
+  scale_input.oninput = render
 
-  // @ts-ignore
-  const file: File | undefined = file_input.files[0]
-  if (!file) return
+  async function render() {
+    let scale = Number(scale_input.value)
+    if (!(Number.isInteger(scale) && scale > 0)) {
+      console.error('Scale must be a positive integer')
+      scale = 1
+    }
+  
+    // @ts-ignore
+    const file: File | undefined = file_input.files[0]
+    if (!file) return
+  
+    const tiles = parse_tile(await file.arrayBuffer())
+    const row_length = 16 // 每行放 16 个 tile
 
-  const tiles = parse_tile(await file.arrayBuffer())
-  const row_length = 16
-  canvas.width = row_length * 8 * scale
-  canvas.height = tiles.length * scale / row_length * 8
-
-  for (let i=0; i<tiles.length; i++) {
-    const [quotient, remainder] = divide(i, row_length)
-    tile2canvas({
-      dx: remainder * 8 * scale,
-      dy: quotient * 8 * scale,
-      color_map,
-      ctx: canvas_ctx,
-      tile: tiles[i],
-
-      scale,
+    const img_data = tile2img_data({
+      width: 8 * row_length,
+      height: tiles.length / row_length * 8,
+      tiles: tiles.map((data, i) => {
+        const [quotient, remainder] = divide(i, row_length)
+        return ({
+          data,
+          x: remainder * 8,
+          y: quotient * 8,
+          color_map,
+        })
+      })
     })
+
+    showcase.setup(img_data.width, img_data.height)
+    showcase.set_img_data(img_data)
   }
 }
+main()
+

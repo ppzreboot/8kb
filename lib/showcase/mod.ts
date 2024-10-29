@@ -29,9 +29,8 @@ class Showcase extends HTMLElement {
 
   /** setup: canvas and events */
   setup(width: number, height: number) {
-    this.#canvas = setup_canvas(width, height)
-    setup_events(this)
-    this.shadowRoot!.appendChild(this.#canvas.instance)
+    this.setup_canvas(width, height)
+    this.setup_events()
   }
 
   /** setup/update img */
@@ -80,24 +79,24 @@ class Showcase extends HTMLElement {
   }
 
   connectedCallback() {
-    this.attachShadow({ mode: 'closed' })
+    const shadow_root = this.attachShadow({ mode: 'closed' })
+    const instance = document.createElement('canvas')
+    const ctx = instance.getContext('2d')!
+    this.#canvas = { instance, ctx }
+    shadow_root.appendChild(instance)
+  }
+
+  private setup_canvas(width: number, height: number) {
+    const ratio = window.devicePixelRatio
+    if (ratio) {
+      this.#canvas!.instance.width = width * ratio
+      this.#canvas!.instance.height = height * ratio
+      this.#canvas!.instance.style.width = width + 'px'
+      this.#canvas!.instance.style.height = height + 'px'
+      this.#canvas!.ctx.scale(ratio, ratio)
+    }
+  }
+  private setup_events() {
   }
 }
 
-function setup_canvas(width: number, height: number) {
-  const instance = document.createElement('canvas')
-  const ctx = instance.getContext('2d')!
-
-  const ratio = window.devicePixelRatio
-  if (ratio) {
-    instance.width = width * ratio
-    instance.height = height * ratio
-    instance.style.width = width + 'px'
-    instance.style.height = height + 'px'
-    ctx.scale(ratio, ratio)
-  }
-
-  return { instance, ctx }
-}
-function setup_events(showcase: Showcase) {
-}
