@@ -123,8 +123,8 @@ class Showcase extends HTMLElement {
     listen('mouseout', () => dragging = false)
     listen('mousemove', evt => {
       if (dragging) {
-        this.#transform.translate.x += evt.movementX
-        this.#transform.translate.y += evt.movementY
+        this.#transform.translate.x += evt.movementX * (devicePixelRatio || 1)
+        this.#transform.translate.y += evt.movementY * (devicePixelRatio || 1)
         this.render()
       }
     })
