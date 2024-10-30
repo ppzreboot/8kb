@@ -123,6 +123,17 @@ class Showcase extends HTMLElement {
         this.render()
       }
     })
+    canvas.addEventListener('wheel', evt => {
+      evt.preventDefault()
+
+      if (evt.deltaY === 0)
+        return
+      else if (evt.deltaY > 0)
+        this.#transform.scale++
+      else
+        this.#transform.scale--
+      this.render()
+    })
   }
 }
 
