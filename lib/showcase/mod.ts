@@ -55,7 +55,12 @@ class Showcase extends HTMLElement {
   }
 
   transform(make: (opts: I_transform_opts) => I_transform_opts) {
-    this.#transform = make(this.#transform)
+    const new_val = make(this.#transform)
+    if (new_val.scale < 1) {
+      console.warn('scale must be get 1')
+      new_val.scale = 1
+    }
+    this.#transform = new_val
     this.render()
   }
 
@@ -130,8 +135,11 @@ class Showcase extends HTMLElement {
         return
       else if (evt.deltaY > 0)
         this.#transform.scale++
-      else
+      else {
         this.#transform.scale--
+        if (this.#transform.scale < 1)
+          this.#transform.scale = 1
+      }
       this.render()
     })
   }
