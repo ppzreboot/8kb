@@ -20,7 +20,7 @@ interface I_transform_opts {
 
 export
 class Showcase extends HTMLElement {
-  #canvas?: I_canvas_prop
+  #canvas: I_canvas_prop
   #img_data?: ImageData
 
   #transform: I_transform_opts = {
@@ -33,23 +33,32 @@ class Showcase extends HTMLElement {
 
   #rendered: boolean = false
 
+  constructor() {
+    super()
+    /* setup dom */
+    const shadow_root = this.attachShadow({ mode: 'closed' })
+    const instance = document.createElement('canvas')
+    const ctx = instance.getContext('2d')!
+    this.#canvas = { instance, ctx }
+    shadow_root.appendChild(instance)
+
+    this.setup_events()
+  }
+
   /** setup: canvas and events */
   resize_canvas(width: number, height: number) {
     const ratio = window.devicePixelRatio
     if (ratio !== 1) {
-      this.#canvas!.instance.width = width
-      this.#canvas!.instance.height = height
-      this.#canvas!.instance.style.width = width / ratio + 'px'
-      this.#canvas!.instance.style.height = height / ratio + 'px'
-      // this.#canvas!.ctx.scale(ratio, ratio)
+      this.#canvas.instance.width = width
+      this.#canvas.instance.height = height
+      this.#canvas.instance.style.width = width / ratio + 'px'
+      this.#canvas.instance.style.height = height / ratio + 'px'
+      // this.#canvas.ctx.scale(ratio, ratio)
     }
   }
 
   /** setup/update img */
   set_img_data(img_data: ImageData) {
-    if (!this.#canvas)
-      throw Error('setup canvas first')
-
     this.#img_data = img_data
     this.render()
   }
@@ -67,7 +76,7 @@ class Showcase extends HTMLElement {
   /** cleanup old img, and then rerender with scale */
   render() {
     // 检查组件
-    if (!this.#canvas || !this.#img_data)
+    if (!this.#img_data)
       throw Error('setup canvas and img_data first')
     // 短引用
     const canvas = this.#canvas.instance
@@ -95,19 +104,9 @@ class Showcase extends HTMLElement {
     )
   }
 
-  connectedCallback() {
-    /* setup dom */
-    const shadow_root = this.attachShadow({ mode: 'closed' })
-    const instance = document.createElement('canvas')
-    const ctx = instance.getContext('2d')!
-    this.#canvas = { instance, ctx }
-    shadow_root.appendChild(instance)
-    
-    this.setup_events()
-  }
 
   private setup_events() {
-    const canvas = this.#canvas!.instance
+    const canvas = this.#canvas.instance
 
     const listen = (
       event: 'mousedown' | 'mouseup' | 'mouseleave' | 'mouseout' | 'mousemove',
