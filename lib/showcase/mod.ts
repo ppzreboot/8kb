@@ -38,6 +38,7 @@ class Showcase extends HTMLElement {
     /* setup dom */
     const shadow_root = this.attachShadow({ mode: 'closed' })
     const instance = document.createElement('canvas')
+    instance.style.display = 'block'
     const ctx = instance.getContext('2d')!
     this.#canvas = { instance, ctx }
     shadow_root.appendChild(instance)

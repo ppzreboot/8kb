@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>8 kb Viewer</title>
+    <title>8kb Viewer</title>
     <style>
-      .row {
-        margin-top: 1rem;
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
       }
     </style>
   </head>
   <body>
-    <div class="row">
-      <input type="file" id="file-input">
-    </div>
-    <div class="row">
-      <ppz-showcase />
-    </div>
-
+    <chr-viewer></chr-viewer>
     <script src="./main.js"></script>
   </body>
 </html>
