@@ -24,7 +24,7 @@ class Showcase extends HTMLElement {
   #img_data?: ImageData
 
   #transform: I_transform_opts = {
-    scale: 1,
+    scale: 4,
     translate: {
       x: 0,
       y: 0,
@@ -104,7 +104,6 @@ class Showcase extends HTMLElement {
       calc_start(canvas.height, cloned.height, this.#transform.translate.y),
     )
   }
-
 
   private setup_events() {
     const canvas = this.#canvas.instance
