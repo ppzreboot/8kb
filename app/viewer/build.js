@@ -1,16 +1,28 @@
-// @ts-check
+import { context, build } from 'esbuild'
 
-import { context } from 'esbuild'
-
-const ctx = await context({
+const opts = {
   entryPoints: ['main.ts'],
   outdir: '.',
   bundle: true,
   logLevel: 'info',
-})
+}
 
-await ctx.watch()
+if (determine_dev()) {
+  const ctx = await context(opts)
+  await ctx.watch()
+  await ctx.serve({
+    servedir: '.',
+  })
+} else
+  build(opts)
 
-await ctx.serve({
-  servedir: '.',
-})
+function determine_dev() {
+  switch (process.argv[2]) {
+    case 'dev':
+      return true
+    case 'pro':
+      return false
+    default:
+      throw Error('dev? pro?')
+  }
+}
