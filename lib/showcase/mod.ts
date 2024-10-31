@@ -110,10 +110,13 @@ class Showcase extends HTMLElement {
     const canvas = this.#canvas.instance
 
     const listen = (
-      event: 'mousedown' | 'mouseup' | 'mouseleave' | 'mouseout' | 'mousemove',
+      event_name: 'mousedown' | 'mouseup' | 'mouseleave' | 'mouseout' | 'mousemove',
       cb: (evt: MouseEvent) => void,
     ) => {
-      canvas.addEventListener(event, cb)
+      canvas.addEventListener(event_name, event => {
+        if (this.#rendered)
+          cb(event)
+      })
     }
 
     let dragging = false
@@ -129,6 +132,8 @@ class Showcase extends HTMLElement {
       }
     })
     canvas.addEventListener('wheel', evt => {
+      if (!this.#rendered) return
+
       evt.preventDefault()
 
       if (evt.deltaY === 0)

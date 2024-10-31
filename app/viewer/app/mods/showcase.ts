@@ -10,5 +10,3 @@ class Showcase extends Base {
     )
   }
 }
-
-customElements.define('ppz-showcase', Showcase)

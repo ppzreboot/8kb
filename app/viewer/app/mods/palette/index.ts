@@ -1,7 +1,7 @@
 import type { color_map } from '@8kb/tile'
 
 export
-class Palette extends HTMLDialogElement {
+class Palette extends HTMLElement {
   #value: color_map
   #values: color_map[] = [
     { // Mario
@@ -20,5 +20,3 @@ class Palette extends HTMLDialogElement {
     return this.#value
   }
 }
-
-customElements.define('ppz-palette', Palette)
