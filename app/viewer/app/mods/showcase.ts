@@ -11,7 +11,4 @@ class Showcase extends Base {
   }
 }
 
-export
-function register() {
-  customElements.define('ppz-showcase', Showcase)
-}
+customElements.define('ppz-showcase', Showcase)
