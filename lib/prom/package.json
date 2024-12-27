@@ -1,10 +1,10 @@
 {
-  "name": "@8kb/extract-chr",
+  "name": "@8kb/prom",
   "version": "0.0.0",
   "type": "module",
   "export": {
     ".": "./mod.js",
-    "./brower": "./brower.js"
+    "./browser": "./browser.js"
   },
   "files": [
     "mod.js",
