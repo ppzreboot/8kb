@@ -44,7 +44,7 @@ function extract_raw_tiles(data: Uint8Array): I_raw_tile[] {
 
   for (let i = 0; i < tiles_sum; i++)
     // @ts-ignore
-    tiles.push(data.slice(i * tile_bytes, (i + 1) * tile_bytes))
+    tiles.push(data.slice(i * nobiat, (i + 1) * nobiat))
   return tiles
 }
 
