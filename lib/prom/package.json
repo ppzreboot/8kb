@@ -1,0 +1,24 @@
+{
+  "name": "@8kb/extract-chr",
+  "version": "0.0.0",
+  "type": "module",
+  "export": {
+    ".": "./mod.js",
+    "./brower": "./brower.js"
+  },
+  "files": [
+    "mod.js",
+    "mod.ts",
+    "prom.js",
+    "prom.ts",
+    "brower.js",
+    "brower.ts",
+    "readme.md"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["binary", "ArrayBuffer", "bit", "8kb"],
+  "author": "PPz",
+  "license": "UNLICENSED"
+}
