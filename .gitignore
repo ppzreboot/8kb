@@ -4,4 +4,3 @@ deno.lock
 
 *.js
 !*.test.js
-
