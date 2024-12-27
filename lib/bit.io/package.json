@@ -1,6 +1,6 @@
 {
   "name": "@8kb/bit.io",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "export": {
     ".": "./mod.js"
