@@ -2,12 +2,21 @@
   "name": "@8kb/bit.io",
   "version": "0.0.0",
   "type": "module",
-  "main": "mod.js",
+  "export": {
+    ".": "./mod.js"
+  },
+  "files": [
+    "mod.js",
+    "mod.ts",
+    "read.js",
+    "read.ts",
+    "readme.md"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "tsc && node --test --watch"
   },
-  "keywords": ["binary", "ArrayBuffer"],
+  "keywords": ["binary", "ArrayBuffer", "bit", "8kb"],
   "author": "PPz",
   "license": "UNLICENSED"
 }

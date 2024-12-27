@@ -1,5 +1,5 @@
 export
-function divide(divident: number, divisor: number) {
+const divide = (divident: number, divisor: number) => {
   const remainder = divident % divisor
   return [
     (divident - remainder) / divisor,
@@ -8,36 +8,33 @@ function divide(divident: number, divisor: number) {
 }
 
 export
-class BitReader {
-  readonly uint8_array: Uint8Array
-  readonly bit_length: number
-  constructor(private array_buffer: ArrayBuffer) {
-    this.uint8_array = new Uint8Array(array_buffer)
-    this.bit_length = this.array_buffer.byteLength * 8
-  }
+type I_bit = 1 | 0
 
-  get_byte(index: number) {
-    if (index >= this.array_buffer.byteLength)
-      throw Error('byte_index is out of range')
-    return this.uint8_array[index]
-  }
-
-  read_bit(index: number) {
-    if (index >= this.bit_length)
-      throw Error('bit_index is out of range')
+export
+const read_bit = (ab: ArrayBuffer) => {
+  const ua = new Uint8Array(ab)
+  const bit_length = ab.byteLength * 8
+  return (index: number): I_bit | 'out of range' | 'invalid index' => {
+    if (index < 0 || index >= bit_length)
+      return 'out of range'
+    if (!Number.isInteger(index))
+      return 'invalid index'
 
     const [byte_index, bit_index] = divide(index, 8)
-    const byte = this.get_byte(byte_index)
+    const byte = ua[byte_index]
 
     let result = byte << bit_index
     result &= 255
-    return result >> 7
+    return result >> 7 as 1 | 0
   }
+}
 
-  read_bits() {
-    const result = []
-    for (let i=0; i<this.bit_length; i++)
-      result.push(this.read_bit(i))
-    return result
-  }
+export
+const read_bits = (ab: ArrayBuffer) => {
+  const bit_length = ab.byteLength * 8
+  const read_bit_by_index = read_bit(ab)
+  const result: I_bit[] = []
+  for (let i=0; i<bit_length; i++)
+    result.push(read_bit_by_index(i) as I_bit)
+  return result
 }
