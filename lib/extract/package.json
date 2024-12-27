@@ -1,18 +1,14 @@
 {
-  "name": "@8kb/prom",
+  "name": "@8kb/extract",
   "version": "0.0.0",
   "type": "module",
   "export": {
-    ".": "./mod.js",
-    "./browser": "./browser.js"
+    "./chr": "./chr/mod.js",
+    "./chr/browser": "./chr/browser.js"
   },
   "files": [
-    "mod.js",
-    "mod.ts",
-    "prom.js",
-    "prom.ts",
-    "brower.js",
-    "brower.ts",
+    "chr/",
+    "tile/",
     "readme.md"
   ],
   "scripts": {

@@ -1,4 +1,4 @@
-import { download_chr } from '@8kb/prom/browser'
+import { download_chr } from '@8kb/extract/chr/browser'
 
 const file_input = document.getElementById('nes-file-input') as HTMLInputElement
 file_input.addEventListener('change', async () => {

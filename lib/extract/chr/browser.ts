@@ -1,4 +1,4 @@
-import { validate_nes, extract_chr } from './prom'
+import { validate_nes, extract_chr } from './mod'
 
 export
 const extract_chr_from_nes = async (nes: File) => {
