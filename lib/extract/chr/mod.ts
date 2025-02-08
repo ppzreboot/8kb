@@ -32,7 +32,7 @@ const validate_nes = (nes: Uint8Array) => {
  */
 export
 const extract_chr = (nes: Uint8Array) => {
-  const prg = nes[4] * 0x4000 // 16KB pages
-  const chr = nes[5] * 0x2000 // 8KB pages
+  const prg = nes[4] * 0x4000 // program: 16KB pages
+  const chr = nes[5] * 0x2000 // charactor: 8KB pages
   return nes.slice(16 + prg, 16 + prg + chr)
 }

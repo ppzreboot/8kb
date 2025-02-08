@@ -1,5 +1,5 @@
 /**
- * number of bytes in a tile
+ * Number Of Bytes In A Tile
  * + A tile has 8*8 pixels
  * + A pixel is 2 bits
  * + A tile is 8*8*2 = 128 bits
