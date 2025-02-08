@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "workspaces": [
     "lib/*",
-    "app/*"
+    "app/demo/*"
   ],
   "devDependencies": {
     "@types/node": "^22.8.1",
