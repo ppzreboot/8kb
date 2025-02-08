@@ -1,6 +1,10 @@
 {
   "name": "@8kb/extract",
   "version": "0.0.0",
+  "repository": "github:ppzreboot/8kb",
+  "author": "PPz",
+  "license": "UNLICENSED",
+
   "type": "module",
   "exports": {
     "./chr": "./chr/mod.js",
@@ -15,8 +19,5 @@
   "scripts": {
     "build": "tsc",
     "test": "tsc && node --test"
-  },
-  "keywords": ["binary", "ArrayBuffer", "bit", "8kb"],
-  "author": "PPz",
-  "license": "UNLICENSED"
+  }
 }
