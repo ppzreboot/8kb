@@ -1,20 +1,26 @@
 import { writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { context, build } from 'esbuild'
 
+const [is_dev, is_pro] = (() => {
+  const mode = process.argv[2]
+  return [mode === 'dev', mode === 'pro']
+})()
+const page_title = process.argv[3]
+const timestamp = new Date().getTime()
+
 main()
 
 function main() {
-  const timestamp = new Date().getTime()
-  output_html(timestamp)
+  /* 1. drop dist */
+  empty_dist()
 
-  const [is_dev, is_pro] = (() => {
-    const mode = process.argv[2]
-    return [mode === 'dev', mode === 'pro']
-  })()
+  /* 2. output html */
+  output_html()
 
+  /* 3. build */
   /** @type {import('esbuild').BuildOptions} */
   const options = {
-    entryPoints: ['src/main.ts'],
+    entryPoints: ['src/main.tsx'],
     entryNames: '[dir]/[name]-' + timestamp,
     outdir: 'dist',
 
@@ -46,17 +52,14 @@ async function _build(opts) {
   await build(opts)
 }
 
-function output_html(timestamp) {
-  rmSync('dist', { recursive: true })
-  mkdirSync('dist')
-
+function output_html() {
   writeFileSync('dist/index.html', `
     <!doctype html>
-    <html lang="zh-CN">
+    <html lang="en">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${}</title>
+        <title>${page_title}</title>
         <link href="./main-${timestamp}.css" rel="stylesheet">
       </head>
       <body>
@@ -65,4 +68,13 @@ function output_html(timestamp) {
       </body>
     </html>
   `)
+}
+
+function empty_dist() {
+  try {
+    rmSync('dist', { recursive: true })
+  } catch(err) {
+    console.log('dist not exist')
+  }
+  mkdirSync('dist')
 }
