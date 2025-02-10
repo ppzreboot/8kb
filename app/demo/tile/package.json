@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "serve": "node ../../../script/2 dev @8kb/tile",
+    "build": "node ../../../script/2 pro @8kb/tile"
+  }
+}

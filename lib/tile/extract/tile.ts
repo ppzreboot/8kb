@@ -12,6 +12,9 @@ const nobiat = 16
  * + A tile is 16 bytes
  * + A byte is a number (0~255)
  * + A tile is 16 numbers
+ * 
+ * + A tile has 8x8 px
+ * + A number is 4 px
  */
 export
 type I_raw_tile = [
@@ -38,13 +41,18 @@ type I_tile = [
 ]
 
 export
+function extract_raw_tile(ua: Uint8Array, index: number): I_raw_tile {
+  // @ts-ignore
+  return ua.slice(index * nobiat, (index + 1) * nobiat)
+}
+
+export
 function extract_raw_tiles(data: Uint8Array): I_raw_tile[] {
   const tiles: I_raw_tile[] = []
   const tiles_sum = data.length / nobiat
 
   for (let i = 0; i < tiles_sum; i++)
-    // @ts-ignore
-    tiles.push(data.slice(i * nobiat, (i + 1) * nobiat))
+    tiles.push(extract_raw_tile(data, i))
   return tiles
 }
 
