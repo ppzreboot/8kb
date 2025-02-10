@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { download_chr, cook_tile, extract_raw_tile } from '@8kb/tile'
 import { app_file_meta } from '../../../ss/ctx'
 
@@ -45,7 +45,9 @@ function Download() {
   return <div>
     <h3>Download</h3>
     <button onClick={() => {
-      download_chr(meta.ua, meta.name)
+      const [ok, error] = download_chr(meta.ua, meta.name)
+      if (!ok)
+        alert(error)
     }}>CHR</button>
   </div>
 }
@@ -60,7 +62,7 @@ function FirstTile() {
       extract_raw_tile(meta.ua, 1)
     )
     const canvas_ctx = canvas.current!.getContext('2d')!
-    canvas_ctx.drawImage(tile)
+    // canvas_ctx.drawImage(tile)
   }, [meta.ua])
 
   return <div>
