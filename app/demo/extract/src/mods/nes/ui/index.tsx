@@ -1,9 +1,11 @@
-import { app_file_meta } from '../../ss/ctx'
+import { download_chr } from '@8kb/extract/chr/file'
+import { app_file_meta } from '../../../ss/ctx'
 
 export
 function NES_page() {
   return <div>
     <Meta />
+    <Download />
   </div>
 }
 
@@ -33,4 +35,11 @@ function Meta() {
       </li>
     </ul>
   </div>
+}
+
+function Download() {
+  const meta = app_file_meta.useCTX()
+
+  return <button onClick={() => {
+  }}>Download CHR</button>
 }

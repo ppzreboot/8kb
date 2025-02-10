@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { I_file_meta } from '../ss/types'
 import { app_file_meta } from '../ss/ctx'
-import { NES_page } from '../mods/page/nes'
-import { CHR_page } from '../mods/page/chr'
+import { NES_page } from '../mods/nes/ui'
+import { CHR_page } from '../mods/chr/ui'
 
 export
 function App() {
