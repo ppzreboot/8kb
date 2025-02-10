@@ -7,22 +7,10 @@ import { CHR_page } from './page/chr'
 export
 function App(props: I_app_state) {
   const file = props.current.useState(s => s.file)
-  const page_key = useMemo(() => {
-    if (!file) return null
-    const suffix = file.name.split('.').at(-1)
-    if (!suffix) return null
-    if (!is_page_key(suffix)) return null
-    return suffix
-  }, [file])
 
   return <>
     <Header file={SDD_unit(props.current, 'file')} />
-    {page_key &&
-      {
-        nes: <NES_page />,
-        chr: <CHR_page />,
-      }[page_key]
-    }
+    {file && <Page file={file} />}
   </>
 }
 
@@ -42,4 +30,20 @@ function Header(props: {
       }
     />
   </div>
+}
+
+function Page({ file }: { file: File }) {
+  const page_key = useMemo(() => {
+    const suffix = file.name.split('.').at(-1)
+    if (!suffix) return null
+    if (!is_page_key(suffix)) return null
+    return suffix
+  }, [file])
+
+  return page_key
+    ? {
+      nes: <NES_page file={file} />,
+      chr: <CHR_page />,
+    }[page_key]
+    : <div>wrong type of file</div>
 }
