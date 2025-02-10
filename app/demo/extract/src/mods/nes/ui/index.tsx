@@ -1,4 +1,4 @@
-import { download_chr } from '@8kb/extract/chr/file'
+import { download_chr } from '@8kb/extract'
 import { app_file_meta } from '../../../ss/ctx'
 
 export
@@ -41,5 +41,6 @@ function Download() {
   const meta = app_file_meta.useCTX()
 
   return <button onClick={() => {
+    download_chr(meta.ua, meta.name)
   }}>Download CHR</button>
 }

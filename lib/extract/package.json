@@ -7,17 +7,9 @@
 
   "type": "module",
   "exports": {
-    "./chr": "./chr/mod.js",
-    "./chr/file": "./chr/file.js",
-    "./tile": "./tile/mod.js"
+    ".": "./mod.js"
   },
-  "files": [
-    "chr/",
-    "tile/",
-    "readme.md"
-  ],
   "scripts": {
-    "build": "tsc",
-    "test": "tsc && node --test"
+    "build": "node ../../script/lib.js"
   }
 }
