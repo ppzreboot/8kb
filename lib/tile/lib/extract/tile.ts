@@ -72,8 +72,3 @@ function cook_tile(raw_tile: I_raw_tile): I_tile {
   }
   return tile as I_tile
 }
-
-export
-function extract_tiles(data: Uint8Array): I_tile[] {
-  return extract_raw_tiles(data).map(cook_tile)
-}
