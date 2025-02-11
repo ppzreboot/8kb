@@ -7,7 +7,7 @@
 
   "type": "module",
   "exports": {
-    ".": "./mod.js"
+    ".": "./lib/mod.js"
   },
   "scripts": {
     "build": "node ../../script/lib.js"

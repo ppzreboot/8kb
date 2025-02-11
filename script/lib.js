@@ -1,8 +1,8 @@
 import { build } from 'esbuild'
 
 build({
-  entryPoints: ['./mod.ts'],
-  outdir: './',
+  entryPoints: ['./lib/mod.ts'],
+  outdir: './lib/',
   format: 'esm',
   minify: true,
   target: ['es2020'],

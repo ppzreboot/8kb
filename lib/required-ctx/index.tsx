@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from 'react';
 
 export
-function create_required_ctx<T>(name: string) {
+function create_required_ctx<T>(name?: string) {
   const ctx = createContext<T | null>(null)
   return {
     Provider: (props: { value: T, children: ReactNode }) =>
@@ -12,7 +12,9 @@ function create_required_ctx<T>(name: string) {
     useCTX: () => {
       const real_ctx = useContext(ctx)
       if (real_ctx === null)
-        throw Error('Missing Context: ' + name)
+        throw Error('Missing Context' + (
+          name ? (': ' + name) : ''
+        ))
       return real_ctx
     }
   }

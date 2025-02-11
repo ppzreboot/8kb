@@ -1,4 +1,4 @@
-import { I_tile } from './mod'
+import { I_tile } from './extract/tile'
 
 export
 type I_rgba = [number, number, number, number]
