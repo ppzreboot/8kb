@@ -26,18 +26,17 @@ type I_raw_tile = [
 export
 type I_color = 0 | 1 | 2 | 3
 
-/** A line of a tile. */
-export
-type I_alot = [
-  I_color, I_color, I_color, I_color,
-  I_color, I_color, I_color, I_color,
-]
-
-/** A tile has 8 rows. A tile is a I_color[8][8]. */
+/** A tile is a I_color[64]. */
 export
 type I_tile = [
-  I_alot, I_alot, I_alot, I_alot,
-  I_alot, I_alot, I_alot, I_alot,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
+  I_color, I_color, I_color, I_color, I_color, I_color, I_color, I_color,
 ]
 
 export
@@ -58,17 +57,18 @@ function extract_raw_tiles(data: Uint8Array): I_raw_tile[] {
 
 export
 function cook_tile(raw_tile: I_raw_tile): I_tile {
-  const tile: number[][] = []
-  let line: number[] = [] // to store a line of colors
-  for(let i = 0; i < raw_tile.length; i++) {
-    if (line.length === 8) { // complete a line
-      tile.push(line)
-      line = []
-    }
-    line.push(0b11 & raw_tile[i]) // retrieve the last 2 bits
-    line.push(0b11 & (raw_tile[i] >> 2)) // 2 bits to right, then retrieve
-    line.push(0b11 & (raw_tile[i] >> 4)) // 4 bits to right, then retrieve
-    line.push(raw_tile[i] >> 6) // 6 bits to right
+  const tile: number[] = []
+  for(let i = 0; i < 8; i++) {
+    let left = raw_tile[i]
+    let right = raw_tile[i + 8]
+    tile.push(((left & 0b10000000) >> 6) | ((right & 0b10000000) >> 7))
+    tile.push(((left & 0b01000000) >> 5) | ((right & 0b01000000) >> 6))
+    tile.push(((left & 0b00100000) >> 4) | ((right & 0b00100000) >> 5))
+    tile.push(((left & 0b00010000) >> 3) | ((right & 0b00010000) >> 4))
+    tile.push(((left & 0b00001000) >> 2) | ((right & 0b00001000) >> 3))
+    tile.push(((left & 0b00000100) >> 1) | ((right & 0b00000100) >> 2))
+    tile.push(((left & 0b00000010)     ) | ((right & 0b00000010) >> 1))
+    tile.push(((left & 0b00000001) << 1) | ((right & 0b00000001)     ))
   }
   return tile as I_tile
 }

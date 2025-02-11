@@ -1,4 +1,4 @@
-import { create_required_ctx } from 'react-ctx'
+import { create_required_ctx } from 'required-ctx'
 import { I_file_meta } from './types'
 
 export

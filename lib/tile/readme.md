@@ -27,3 +27,7 @@ They're like the pixels of the NES, but bigger.
 + A pixel has 2 bits (for 4 colors)
 + A tile has 8\*8\*2 bits
 + A tile has 16 bytes
+
+> [!IMPORTANT]
+> `tile[0] + tile[1]` is not a pixel.  
+> `tile[0] + tile[0 + 64]` is a pixel.  
