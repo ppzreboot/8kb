@@ -1,7 +1,11 @@
-# @8kb/extract
+# @8kb/tile
+
++ extract the chr rom from a iNES rom
++ extract tiles from a chr rom
++ render a tile to a ImageData
 
 ``` bash
-npm i @8kb/extract
+npm i @8kb/tile
 ```
 
 > A library should provide the fewest possible functions
