@@ -1,5 +1,8 @@
 {
-  "name": "render-tile",
+  "name": "@8kb/render-tile",
   "version": "0.0.0",
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": "./lib/mod.ts"
+  }
 }
