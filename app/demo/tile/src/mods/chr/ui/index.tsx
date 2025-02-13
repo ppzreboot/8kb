@@ -45,11 +45,13 @@ function render(tiles: ImageData[], real_canvas: HTMLCanvasElement) {
     o_canvas_ctx.putImageData(tiles[i], (i % row_length) * 8, (Math.floor(i / row_length)) * 8)
 
   // scale info
-  const scale = 1
+  const scale = 8
   const scaled_w = width * scale
   const scaled_h = height * scale
   real_canvas.width = scaled_w
   real_canvas.height = scaled_h
+  real_canvas.style.width = scaled_w / window.devicePixelRatio + 'px'
+  real_canvas.style.height = scaled_h / window.devicePixelRatio + 'px'
 
   // render to the real canvas
   const real_ctx = real_canvas.getContext('2d')!
