@@ -78,3 +78,21 @@ function download_ua(ua: Uint8Array, file_name: string) {
   chr_link.click()
 }
 ```
+
+##### Render A Tile (I_tile -> ImageData)
+
+``` ts
+import { render_tile } from '@8kb/tile'
+
+function render(tile: I_tile) {
+  const img_data = render_tile(tile, {
+    0: [0, 0, 0, 0],     // transparent or any other color
+    1: [255, 0, 0, 255], // red
+    2: [0, 255, 0, 255], // green
+    3: [0, 0, 255, 255], // bluek
+  })
+}
+```
+
+##### Render A Tile to Canvas
+Please refer to [@8kb/render](https://github.com/ppzreboot/8kb/tree/main/lib/render).
