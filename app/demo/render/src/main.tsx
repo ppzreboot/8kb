@@ -6,17 +6,7 @@ const width = 5
 const height = 6
 const full_width = width * scale
 const full_height = height * scale
-
-// prepare a canvas
-const canvas = document.createElement('canvas')
-document.body.appendChild(canvas)
-canvas.width = full_width
-canvas.height = full_height
-canvas.style.width = full_width / window.devicePixelRatio + 'px'
-canvas.style.height = full_height / window.devicePixelRatio + 'px'
-/** getContext !!after!! setting up canvas */
-const ctx = canvas.getContext('2d')!
-ctx.imageSmoothingEnabled = false
+const canvas_ctx = prepare_canvas()
 
 main()
 
@@ -41,5 +31,19 @@ async function main() {
   // scale
   const scaled = scale_img(ocanvas, full_width, full_height)
 
-  ctx.drawImage(scaled.canvas, 0, 0)
+  canvas_ctx.drawImage(scaled.canvas, 0, 0)
+}
+
+function prepare_canvas() {
+  const canvas = document.createElement('canvas')
+  document.body.appendChild(canvas)
+  canvas.width = full_width
+  canvas.height = full_height
+  canvas.style.width = full_width / window.devicePixelRatio + 'px'
+  canvas.style.height = full_height / window.devicePixelRatio + 'px'
+  /** getContext !!after!! setting up canvas */
+  const ctx = canvas.getContext('2d')!
+  ctx.imageSmoothingEnabled = false
+
+  return ctx
 }
