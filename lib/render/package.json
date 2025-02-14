@@ -1,5 +1,5 @@
 {
-  "name": "@8kb/render-tile",
+  "name": "@8kb/render",
   "version": "0.0.0",
   "type": "module",
   "exports": {
